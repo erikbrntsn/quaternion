@@ -89,7 +89,7 @@ class Quaternion(object):
         return mPrime
 
     def __str__(self):
-        return str(self.val)
+        return "[{:}, {:}, {:}, {:}]".format(*self.val)
 
     def __repr__(self):
-        return str(self.val)
+        return "[{:}, {:}, {:}, {:}]".format(*self.val)
