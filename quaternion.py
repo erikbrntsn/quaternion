@@ -63,8 +63,8 @@ class Quaternion(object):
     def norm(self):
         return np.linalg.norm(self.val)
 
-    def axis(self):
-        return self.val[1:]
+    def vectorPart(self):
+        return np.array([self.val[1], self.val[2], self.val[3]])
 
     def conjugate(self):
         return Quaternion(self.val[0], -self.val[1], -self.val[2], -self.val[3])
