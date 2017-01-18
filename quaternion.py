@@ -18,7 +18,7 @@ class Quaternion(object):
             print("Tried to add unknown type", rhs.__class__ is Quaternion, self.__class__ is Quaternion)
 
     def __radd__(self, lhs):
-        if isinstance(rhs, numbers.Number):
+        if isinstance(lhs, numbers.Number):
             return self + lhs
 
     def __sub__(self, rhs):
@@ -49,6 +49,9 @@ class Quaternion(object):
 
     def __getitem__(self, i):
         return self.val[i]
+
+    def __setitem__(self, i, val):
+        self.val[i] = val
 
     def __neg__(self):
         return Quaternion(*-self.val)
