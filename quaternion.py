@@ -59,7 +59,7 @@ class Quaternion(object):
     def normalize(self):
         norm = self.norm()
         if not norm == 0:
-            self.val = self.val / self.norm()
+            self.val /= norm
         else:
             print('Quaternion not normalizable')
 
@@ -79,7 +79,9 @@ class Quaternion(object):
         return self[0] * q[0] + self[1] * q[1] + self[2] * q[2] + self[3] * q[3]
 
     def rotateVector(self, v):
-        """ Return v rotated by self. It is assumed self is normalized """
+        """ Return v rotated by self. It is assumed self is normalized.
+            v_new = new_q_old * (0, v_old) * old_q_new
+            return v_new """
         return (self * Quaternion(0, *v) * self.conjugate())[1:]
 
     def rotateVectors(self, m):
@@ -90,6 +92,9 @@ class Quaternion(object):
         for i in range(m.shape[1]):
             mPrime[:, i] = self.rotateVector(m[:, i])
         return mPrime
+
+    def copy(self):
+        return Quaternion(*self.val)
 
     def __str__(self):
         return "[{:}, {:}, {:}, {:}]".format(*self.val)
